@@ -23,5 +23,11 @@ junior data scientist training plan
 详见：[COVID-19疫情数据分析-学习计划](./data-analysis-for-covid-19/plan.md)
 > 2 weeks
 
-## extra 
-1. 天猫订单数据分析
+## 三、flink状态计算
+### 目标
+1. 了解flink实时流式计算的基本概念以及有状态计算的应用
+2. 动手编码实践，解决实际生产问题
+
+### 学习计划
+详见：[flink状态计算-学习计划](./flink/plan.md)
+> 2 weeks
