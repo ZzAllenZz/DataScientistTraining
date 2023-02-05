@@ -2,6 +2,7 @@ package overtime;
 
 import domain.CityAgg;
 import domain.OrderDetail;
+import org.apache.flink.api.common.functions.MapFunction;
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.configuration.RestOptions;
 import org.apache.flink.streaming.api.datastream.DataStream;
@@ -27,12 +28,12 @@ public class OvertimeCountJob {
         conf.setInteger(RestOptions.PORT,8888);
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment(conf);
         //完成任务1时 先忽略
-        //env.enableCheckpointing(1000L);
+        env.enableCheckpointing(1000L);
         DataStream<OrderDetail> orders = env
                 .addSource(new OrderSource())
                 .name("orders");
 
-/*      //完成任务1时 先忽略
+      //完成任务1时 先忽略
         DataStream<OrderDetail> dirtyData = orders.map(new MapFunction<OrderDetail, OrderDetail>() {
             @Override
             public OrderDetail map(OrderDetail orderDetail) throws Exception {
@@ -44,7 +45,7 @@ public class OvertimeCountJob {
                 return orderDetail;
             }
         });
-        dirtyData.print();*/
+        dirtyData.print();
 
 
         DataStream<CityAgg> counter = orders
