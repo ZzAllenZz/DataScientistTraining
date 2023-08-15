@@ -3,6 +3,7 @@ package overtime;
 import domain.CityAgg;
 import domain.OrderDetail;
 import org.apache.flink.api.common.functions.MapFunction;
+import org.apache.flink.api.common.restartstrategy.RestartStrategies;
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.configuration.RestOptions;
 import org.apache.flink.streaming.api.datastream.DataStream;
@@ -27,26 +28,28 @@ public class OvertimeCountJob {
         Configuration conf = new Configuration();
         conf.setInteger(RestOptions.PORT,8888);
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment(conf);
+
         //完成任务1时 先忽略
-        env.enableCheckpointing(1000L);
+/*        env.enableCheckpointing(100L);
+        env.setRestartStrategy(RestartStrategies.fixedDelayRestart(3,5000));*/
+
         DataStream<OrderDetail> orders = env
                 .addSource(new OrderSource())
                 .name("orders");
 
-      //完成任务1时 先忽略
-        DataStream<OrderDetail> dirtyData = orders.map(new MapFunction<OrderDetail, OrderDetail>() {
+        //完成任务1时 先忽略
+/*        DataStream<OrderDetail> dirtyData = orders.map(new MapFunction<OrderDetail, OrderDetail>() {
             @Override
             public OrderDetail map(OrderDetail orderDetail) throws Exception {
 
                 boolean randomBool = new Random().nextBoolean();
-                if(randomBool && orderDetail.getOrderId()%9==0){
+                if(randomBool && orderDetail.getOrderId()%2==0){
                     throw new Exception("dirty data occurs");
                 }
                 return orderDetail;
             }
         });
-        dirtyData.print();
-
+        dirtyData.print();*/
 
         DataStream<CityAgg> counter = orders
                 .keyBy(OrderDetail::getCityId)
@@ -59,4 +62,5 @@ public class OvertimeCountJob {
 
         env.execute("OvertimeCountJob");
     }
+
 }
