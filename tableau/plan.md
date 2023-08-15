@@ -17,7 +17,7 @@ tableau可以连接多种数据源，例如Excel、文本文件、 statistical f
 ### 4. 创建worksheet
 ![](resource/2022-08-13-19-32-17.png)
 
-### 5. Aggregation 聚合
+### 5. Aggregation 聚合 
 可以通过右键单击三角形来选择正在执行的聚合类型。要更改聚合方法，选择“度量”，然后选择“总和”、“平均值”、“中位数”等。
 ![](resource/2022-08-13-19-32-57.png)
 
@@ -57,5 +57,5 @@ Stories are great for a narrated walkthrough of the discoveries you made in your
 Below is a story I made looking into why the Global Superstore is losing money in some countries.
 ![](resource/2022-08-13-19-56-24.png)
 
-复刻出上图所示的报告，外加一些自己的思考，把你的故事讲清楚。
+复刻出上图所示的报告，外加一些自己的思考，把你的故事讲清楚。 
 
